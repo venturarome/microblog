@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!------------------------------------------- 
+    Document Title
+    -------------------------------------------->
+    <title>
+        {% block title %}RafaFdezJr{% endblock %}
+    </title>
+
+    <!------------------------------------------- 
+    Favicons
+    -------------------------------------------->
+    <!-- To change with rafa's logo (shark i.e.) -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-57x57.png') }}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-60x60.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-76x76.png') }}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-114x114.png') }}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-120x120.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='assets/images/favicons/apple-icon-180x180.png') }}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='assets/images/favicons/android-icon-192x192.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='assets/images/favicons/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ url_for('static', filename='assets/images/favicons/favicon-96x96.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='assets/images/favicons/favicon-16x16.png') }}">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ url_for('static', filename='assets/images/favicons/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+
+    <!------------------------------------------- 
+    Stylesheets
+    -------------------------------------------->
+    <!-- {% block extra_stylesheets %}{% endblock %} -->
+    <!-- Default stylesheets-->
+    <link href="{{ url_for('static', filename='assets/lib/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet"> <!-- assets/lib/bootstrap/dist/css/bootstrap.min.css -->
+    <!-- Template specific stylesheets-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/lib/animate.css/animate.css') }}" rel="stylesheet"> <!-- assets/lib/animate.css/animate.css -->
+    <link href="{{ url_for('static', filename='assets/lib/components-font-awesome/css/font-awesome.min.css') }}" rel="stylesheet"> <!-- assets/lib/components-font-awesome/css/font-awesome.min.css -->
+    <link href="{{ url_for('static', filename='assets/lib/et-line-font/et-line-font.css') }}" rel="stylesheet"> <!-- assets/lib/et-line-font/et-line-font.css -->
+    <link href="{{ url_for('static', filename='assets/lib/flexslider/flexslider.css') }}" rel="stylesheet"> <!-- assets/lib/flexslider/flexslider.css -->
+    <link href="{{ url_for('static', filename='assets/lib/owl.carousel/dist/assets/owl.carousel.min.css') }}" rel="stylesheet"> <!-- assets/lib/owl.carousel/dist/assets/owl.carousel.min.css -->
+    <link href="{{ url_for('static', filename='assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css') }}" rel="stylesheet"> <!-- assets/lib/owl.carousel/dist/assets/owl.theme.default.min.css -->
+    <link href="{{ url_for('static', filename='assets/lib/magnific-popup/dist/magnific-popup.css') }}" rel="stylesheet"> <!-- assets/lib/magnific-popup/dist/magnific-popup.css -->
+    <link href="{{ url_for('static', filename='assets/lib/simple-text-rotator/simpletextrotator.css') }}" rel="stylesheet"> <!-- assets/lib/simple-text-rotator/simpletextrotator.css -->
+    <!-- Main stylesheet and color file-->
+    <link href="{{ url_for('static', filename='assets/css/style.css') }}" rel="stylesheet"> <!-- assets/css/style.css -->
+    <link id="color-scheme" href="{{ url_for('static', filename='assets/css/colors/default.css') }}" rel="stylesheet"> <!-- assets/css/colors/default.css -->
+    
+    <!------------------------------------------- 
+    My custom styles
+    -------------------------------------------->
+    <style media="screen" type="text/css">
+        .zoom-logo {
+            transition: all 1.25s ease-in-out;
+            width:50%;
+            height:auto;
+        }
+        .zoom-logo:hover {
+            transform: scale(2) translateY(25%);
+        }
+        .navbar-brand { /*Override behaviour from style.css*/
+            padding: 10px 0px;
+        }
+    </style>
+    
+</head>
+
+<body data-spy="scroll" data-target=".onpage-navigation" data-offset="60">
+    <!------------------------------------------- 
+    Initial Page Loader
+    -------------------------------------------->
+    <div class="page-loader">
+        <div class="loader">Loading...</div>
+    </div>
+
+   
+    <!------------------------------------------- 
+    Header: Top Navigation Bar
+    -------------------------------------------->
+    <!-- IDEA: sustituir el Logo por las redes sociales. Debajo de la navbar, poner el logo en grande, centrado. -->
+    <section class="module-extra-small">
+        <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- çToggle menu -->
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#custom-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Social media -->
+                    <!-- https://www.flaticon.com/packs/social-media-logos-2 -->
+                    <a class="navbar-brand" target="_blank" href="https://www.facebook.com/rafael.fernandezcaballero">
+                        <img class="zoom-logo" src="{{ url_for('static', filename='icons/social/facebook64.png') }}">
+                    </a>
+                    <a class="navbar-brand" target="_blank" href="https://www.instagram.com/rafafdezjr/">
+                        <img class="zoom-logo" src="{{ url_for('static', filename='icons/social/instagram64.png') }}">
+                    </a>
+                    <a class="navbar-brand" target="_blank" href="https://twitter.com/travellershark">
+                        <img class="zoom-logo" src="{{ url_for('static', filename='icons/social/twitter64.png') }}">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="custom-collapse">
+                    <!-- Menus -->
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#totop">Inicio</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" href="{{ url_for('about') }}" data-toggle="dropdown">Autor</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ url_for('about', _anchor='about') }}">Sobre mí</a></li>
+                                <li><a href="{{ url_for('about', _anchor='prizes') }}">Premios</a></li>
+                                <li><a href="{{ url_for('about', _anchor='cv') }}">Currículum</a></li>
+                                <li><a href="{{ url_for('about', _anchor='collaborations') }}">Colaboraciones</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" href="{{ url_for('portfolio') }}" data-toggle="dropdown">Galería</a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown"><a class="dropdown-toggle" href="{{ url_for('portfolio') }}" data-toggle="dropdown">Campeonatos</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="index_mp_fullscreen_static.html">(Opcional) Campeonato X</a></li>
+                                        <li><a href="index_mp_classic_static.html">(Opcional) Campeonato Y</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="{{ url_for('portfolio') }}" data-toggle="dropdown">Gran angular</a>
+                                </li>
+                                <li><a href="{{ url_for('portfolio') }}" data-toggle="dropdown">Macro</a>
+                                </li>
+                                <li><a href="{{ url_for('portfolio') }}" data-toggle="dropdown">Artística</a>
+                                </li>
+                                <li><a href="{{ url_for('portfolio') }}" data-toggle="dropdown">Terrestre</a>
+                                </li>
+                                <li><a href="{{ url_for('portfolio') }}" data-toggle="dropdown">(añadir más categorías)</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('news') }}">Blog y noticias</a>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" href="{{ url_for('courses') }}" data-toggle="dropdown">Cursos y talleres (Formación)</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{ url_for('courses', _anchor='workshops') }}">Cursos</a>
+                                </li>
+                                <li><a href="{ url_for('courses', _anchor='calendar') }}">Calendario</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ url_for('contact') }}">Contacto</a>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" href="{{ url_for('shop') }}" data-toggle="dropdown">Tienda</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="alerts-and-wells.html"><i class="fa fa-bolt"></i> Hay plantilla -> Buscar</a></li>
+                            </ul>
+                        </li>
+                        <!--
+                        <li class="dropdown"><a class="dropdown-toggle" href="documentation.html" data-toggle="dropdown">Documentation</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">(no quitar, me viene bien)</a></li>
+                                <li><a href="documentation.html#contact">Contact Form</a></li>
+                                <li><a href="documentation.html#reservation">Reservation Form</a></li>
+                                <li><a href="documentation.html#mailchimp">Mailchimp</a></li>
+                                <li><a href="documentation.html#gmap">Google Map</a></li>
+                                <li><a href="documentation.html#plugin">Plugins</a></li>
+                                <li><a href="documentation.html#changelog">Changelog</a></li>
+                                <li><a href="alerts-and-wells.html"><i class="fa fa-bolt"></i> Alerts and wells</a></li>
+                            </ul>
+                        </li>
+                        -->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <!------------------------------------------- 
+    Flash messages (if any)
+    -------------------------------------------->
+    <!-- IDEA: crear un block que permita seleccionar qué tipo de alerta se quiere, así como el icono. Ese block seriá customizado en la plantilla a renderizar. -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <!-- alert-*, where *=success, info, warning, danger. -->
+                <!-- fa fa-*, where * denotes icons to show, sich as: coffee, spin, diamond, cutlery... -->
+                <div class="alert alert-info" role="alert">
+                  <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&times;</button><i class="fa fa-cog fa-spin"></i><strong>Info:</strong> {{msg}}.
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <!--Here starts specific code for each page -->
+    <main style="min-height:100%"> <!-- mover el style to style.css (bajo la class 'main'-->
+        {% block main %}{% endblock %}
+    </main>
+
+
+
+    <!-- Space to paste temporary code and check how it will fit.-->
+
+    
+
+
+
+
+
+
+    <!------------------------------------------- 
+    Miscellaneous Info Bar (activity)
+    -------------------------------------------->
+    <section class="module-small bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">About Titan</h5>
+                        <p>The languages only differ in their grammar, their pronunciation and their most common words.</p>
+                        <p>Phone: +1 234 567 89 10</p>Fax: +1 234 567 89 10
+                        <p>Email:<a href="#">somecompany@example.com</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Recent Comments</h5>
+                        <ul class="icon-list">
+                            <li>Maria on <a href="#">Designer Desk Essentials</a></li>
+                            <li>John on <a href="#">Realistic Business Card Mockup</a></li>
+                            <li>Andy on <a href="#">Eco bag Mockup</a></li>
+                            <li>Jack on <a href="#">Bottle Mockup</a></li>
+                            <li>Mark on <a href="#">Our trip to the Alps</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Blog Categories</h5>
+                        <ul class="icon-list">
+                            <li><a href="#">Photography - 7</a></li>
+                            <li><a href="#">Web Design - 3</a></li>
+                            <li><a href="#">Illustration - 12</a></li>
+                            <li><a href="#">Marketing - 1</a></li>
+                            <li><a href="#">Wordpress - 16</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="widget">
+                        <h5 class="widget-title font-alt">Popular Posts</h5>
+                        <ul class="widget-posts">
+                            <li class="clearfix">
+                                <div class="widget-posts-image"><a href="#"><img src="{{ url_for('static', filename='assets/images/rp-1.jpg') }}" alt="Post Thumbnail"/></a></div>
+                                <div class="widget-posts-body">
+                                    <div class="widget-posts-title"><a href="#">Designer Desk Essentials</a></div>
+                                    <div class="widget-posts-meta">23 january</div>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="widget-posts-image"><a href="#"><img src="{{ url_for('static', filename='assets/images/rp-2.jpg') }}" alt="Post Thumbnail"/></a></div>
+                                <div class="widget-posts-body">
+                                    <div class="widget-posts-title"><a href="#">Realistic Business Card Mockup</a></div>
+                                    <div class="widget-posts-meta">15 February</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider-d">
+
+    <!------------------------------------------- 
+    Footer Bar
+    -------------------------------------------->
+    <footer class="footer bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <p class="copyright font-alt"><a href="{{ url_for('license') }}">&copy;</a> 2018&nbsp;<a href="index.html">Rafael Fernández Caballero</a>, derechos reservados</p>
+                </div>
+                <div class="col-sm-4">
+                    <div class="footer-social-links">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
+                        <a href="#"><i class="fa fa-skype"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-up"><a href="#totop"><i class="fa fa-angle-double-up"></i></a></div>
+
+    <!------------------------------------------- 
+    JavaScripts
+    -------------------------------------------->
+    <script src="{{ url_for('static', filename='assets/lib/jquery/dist/jquery.js') }}"></script> <!-- assets/lib/jquery/dist/jquery.js -->
+    <script src="{{ url_for('static', filename='assets/lib/bootstrap/dist/js/bootstrap.min.js') }}"></script> <!-- assets/lib/bootstrap/dist/js/bootstrap.min.js -->
+    <script src="{{ url_for('static', filename='assets/lib/wow/dist/wow.js') }}"></script> <!-- assets/lib/wow/dist/wow.js -->
+    <script src="{{ url_for('static', filename='assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js') }}"></script> <!-- assets/lib/jquery.mb.ytplayer/dist/jquery.mb.YTPlayer.js -->
+    <script src="{{ url_for('static', filename='assets/lib/isotope/dist/isotope.pkgd.js') }}"></script> <!-- assets/lib/isotope/dist/isotope.pkgd.js -->
+    <script src="{{ url_for('static', filename='assets/lib/imagesloaded/imagesloaded.pkgd.js') }}"></script> <!-- assets/lib/imagesloaded/imagesloaded.pkgd.js -->
+    <script src="{{ url_for('static', filename='assets/lib/flexslider/jquery.flexslider.js') }}"></script> <!-- assets/lib/flexslider/jquery.flexslider.js -->
+    <script src="{{ url_for('static', filename='assets/lib/owl.carousel/dist/owl.carousel.min.js') }}"></script> <!-- assets/lib/owl.carousel/dist/owl.carousel.min.js -->
+    <script src="{{ url_for('static', filename='assets/lib/smoothscroll.js') }}"></script> <!-- assets/lib/smoothscroll.js -->
+    <script src="{{ url_for('static', filename='assets/lib/magnific-popup/dist/jquery.magnific-popup.js') }}"></script> <!-- assets/lib/magnific-popup/dist/jquery.magnific-popup.js -->
+    <script src="{{ url_for('static', filename='assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js') }}"></script> <!-- assets/lib/simple-text-rotator/jquery.simple-text-rotator.min.js -->
+    <script src="{{ url_for('static', filename='assets/js/plugins.js') }}"></script> <!-- assets/js/plugins.js -->
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script> <!-- assets/js/main.js -->
+</body>
+
+</html>

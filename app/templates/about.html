@@ -1,0 +1,157 @@
+ {% extends "layout.html" %}
+
+<!------------------------------------------>
+
+{% block title %} RafaFdezJr | Sobre mí {% endblock %}
+
+<!------------------------------------------>
+
+{% block main %}
+<div class="main">
+
+    <!------------------------------------------- 
+    Image, title and text (I)
+    -------------------------------------------->
+    <section class="module pt-0 pb-0" id="about">
+        <div class="row position-relative m-0">
+            <div class="col-xs-12 col-md-6 side-image" data-background="{{ url_for('static', filename='assets/images/section-14.jpg') }}"></div>
+            <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="module-title font-alt align-left">Sobre mí</h2>
+                        <div class="module-subtitle font-serif align-left">La imagen y el texto se pueden cambiar de lado. Además, los anchos también se pueden variar según tengas mucho/poco texto y según sea la foto horizontal o vertical.</div>
+                        <p>El espacio entre los párrafos, sangrías y demás, también los podemos modificar.</p>
+                        <p>Ten en cuenta que en pantallas de móvil, la imagen aparece antes que el textom una cosa encima de la otra</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider-w">
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-5">
+            <div class="large-text align-center"><a class="section-scroll" href="#services"><i class="fa fa-angle-down"></i></a></div>
+        </div>
+    </div>
+    <hr class="divider-w">
+
+    <!------------------------------------------- 
+    Counters
+    -------------------------------------------->
+    <section class="module-small bg-dark-60" data-background="{{ url_for('static', filename='assets/images/section-6.jpg') }}">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h2 class="module-title font-alt">Titulo opcional</h2>
+                    <div class="module-subtitle font-serif"></div>
+                </div>
+            </div>
+            <div class="row multi-columns-row">
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="count-item mb-sm-40">
+                        <div class="count-icon"><span class="icon-camera"></span></div>
+                        <h3 class="count-to font-alt" data-countto="1840"></h3>
+                        <h5 class="count-title font-serif">Fotografías hechas</h5>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="count-item mb-sm-40">
+                        <div class="count-icon"><span class="icon-trophy"></span></div>
+                        <h3 class="count-to font-alt" data-countto="6543"></h3>
+                        <h5 class="count-title font-serif">Títulos</h5>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="count-item mb-sm-40">
+                        <div class="count-icon"><span class="icon-anchor"></span></div>
+                        <h3 class="count-to font-alt" data-countto="8"></h3>
+                        <h5 class="count-title font-serif">Barcos encontrados</h5>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3 col-lg-3">
+                    <div class="count-item mb-sm-40">
+                        <div class="count-icon"><span class="icon-map-pin"></span></div>
+                        <h3 class="count-to font-alt" data-countto="32"></h3>
+                        <h5 class="count-title font-serif">Zonas de buceo cubiertas</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!------------------------------------------- 
+    Image, title and text. (II)
+    -------------------------------------------->
+    <section class="module pt-0 pb-0" id="prizes">
+        <div class="row position-relative m-0">
+            <div class="col-xs-12 col-sm-6 col-md-8 side-image" data-background="{{ url_for('static', filename='assets/images/section-14.jpg') }}"></div>
+            <div class="col-xs-12 col-sm-6 col-md-4 col-md-offset-8 side-image-text">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="module-title font-alt align-left">Premios</h2>
+                        <div class="module-subtitle font-serif align-left">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
+                        <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words.</p>
+                        <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider-w">
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-5">
+            <div class="large-text align-center"><a class="section-scroll" href="#services"><i class="fa fa-angle-down"></i></a></div>
+        </div>
+    </div>
+    <hr class="divider-w">
+
+    <!------------------------------------------- 
+    Image, title and text (III)
+    -------------------------------------------->
+    <section class="module pt-0 pb-0" id="cv">
+        <div class="row position-relative m-0">
+            <div class="col-xs-12 col-md-6 col-md-offset-6 side-image" data-background="{{ url_for('static', filename='assets/images/section-14.jpg') }}"></div>
+            <div class="col-xs-12 col-md-6 side-image-text">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="module-title font-alt align-left">Curriculum</h2>
+                        <div class="module-subtitle font-serif align-left">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
+                        <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words.</p>
+                        <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <hr class="divider-w">
+    <div class="row">
+        <div class="col-sm-2 col-sm-offset-5">
+            <div class="large-text align-center"><a class="section-scroll" href="#services"><i class="fa fa-angle-down"></i></a></div>
+        </div>
+    </div>
+    <hr class="divider-w">
+
+    <!------------------------------------------- 
+    Image, title and text (IV)
+    -------------------------------------------->
+    <section class="module pt-0 pb-0" id="collaborations">
+        <div class="row position-relative m-0">
+            <div class="col-xs-12 col-md-6 side-image" data-background="{{ url_for('static', filename='assets/images/section-14.jpg') }}"></div>
+            <div class="col-xs-12 col-md-6 col-md-offset-6 side-image-text">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2 class="module-title font-alt align-left">Colaboraciones</h2>
+                        <div class="module-subtitle font-serif align-left">A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</div>
+                        <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary. The languages only differ in their grammar, their pronunciation and their most common words.</p>
+                        <p>The European languages are members of the same family. Their separate existence is a myth. For science, music, sport, etc, Europe uses the same vocabulary.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}

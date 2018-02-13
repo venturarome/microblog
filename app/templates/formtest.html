@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>test</h1>
+    <form action="" method="post">
+        <!-- This will avoid CSRF attacks. -->
+        {{ form.hidden_tag() }}
+       
+{% for field in form %}
+    <tr>
+        <th>{{ field.label }}</th>
+        <br>
+        <td>{{ field(placeholder=field.name) }}</td>
+        <br>
+        <td>{{ field.name }}</td>
+        <br><br>
+    </tr>
+{% endfor %}
+
+{% endblock %}

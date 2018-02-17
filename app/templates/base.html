@@ -13,6 +13,7 @@
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('tutologin') }}">Login</a>
             {% else %}
+            <a href="{{ url_for('tutouser', username=current_user.username) }}">Profile</a>
             <a href="{{ url_for('tutologout') }}">Logout</a>
             {% endif %}
         </div>

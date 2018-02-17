@@ -1,11 +1,20 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginTutoForm, RegistrationTutoForm, AddBlogEntryForm, AddEventForm, SampleForm
+from app.forms import LoginTutoForm, RegistrationTutoForm, EditProfileTutoForm, AddBlogEntryForm, AddEventForm, SampleForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
+from datetime import datetime
 
 #=== Following tutorial
+
+@app.before_request
+def before_request():
+    # The @before_request decorator registers the decorated function to be executed right before every view function in the application.
+    if current_user.is_authenticated:
+        current_user.last_seen = datetime.utcnow()
+        db.session.commit()
+
 @app.route('/index/')
 @login_required
 def index():
@@ -44,7 +53,6 @@ def tutologout():
     logout_user()
     return redirect(url_for('index'))
 
-
 @app.route('/registertuto/', methods=['GET', 'POST'])
 def tutoregister():
     if current_user.is_authenticated:
@@ -58,6 +66,32 @@ def tutoregister():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('tutologin'))
     return render_template('tutoregister.html', title='Register', form=form)
+
+@app.route('/user/<username>/')
+@login_required
+def tutouser(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('tutouser.html', user=user, posts=posts)
+
+@app.route('/editprofile', methods=['GET', 'POST'])
+@login_required
+def tutoeditprofile():
+    form = EditProfileTutoForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.about_me = form.about_me.data
+        db.session.commit()
+        flash('Your changes have been saved.')
+        return redirect(url_for('tutoeditprofile'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.about_me.data = current_user.about_me
+    return render_template('tutoeditprofile.html', title='Edit Profile',
+                           form=form)
 
 
 

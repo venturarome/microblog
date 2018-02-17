@@ -2,7 +2,7 @@ from datetime import datetime
 from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from hashlib import md5
 
 # Because Flask-Login knows nothing about databases, it needs the application's help in loading a user. For that reason, the extension expects that the application will configure a user loader function, that can be called to load a user given the ID.
 @login.user_loader
@@ -24,9 +24,15 @@ class User(UserMixin, db.Model): # Here, UserMixin is added so the flask-login m
     username = db.Column(db.String(32), index=True, unique=True)
     email = db.Column(db.String(128), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    about_me = db.Column(db.String(256))
+    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     # Relationships with other tables:
     comments = db.relationship('Comment', backref='author', lazy='dynamic')
+
+    # How a row will be printed:
+    def __repr__(self):
+        return '<User {}>'.format(self.username)
 
 
     # Set password (hashing it before):
@@ -37,10 +43,10 @@ class User(UserMixin, db.Model): # Here, UserMixin is added so the flask-login m
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-
-    # How a row will be printed:
-    def __repr__(self):
-        return '<User {}>'.format(self.username)
+    # Retrieve or create an avatar:
+    def avatar(self, size=64):
+        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(digest, size)
 
 
 class Comment(db.Model):

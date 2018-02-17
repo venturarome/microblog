@@ -3,7 +3,7 @@
 # https://flask-wtf.readthedocs.io/en/stable/
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, DateField, FileField    #, MultipleFileField (not working yet...)
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from app.models import User
 
 # Tutorial
@@ -30,6 +30,11 @@ class RegistrationTutoForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+class EditProfileTutoForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    about_me = TextAreaField('About me', validators=[Length(min=0, max=256)])
+    submit = SubmitField('Submit')
 
 
 

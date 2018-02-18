@@ -13,7 +13,7 @@ def load_user(id):
 
 # Check documentation: http://flask-sqlalchemy.pocoo.org/2.3/
 
-# NOTE: do not forget to add the new model to rafafdez.py!!!
+# NOTE: do not forget to add the new model to microblog.py!!!
 
 # This is just a table (no data model), as it does not contain more than foreign keys.
 followers = db.Table('followers',

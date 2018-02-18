@@ -1,21 +1,21 @@
 <html>
     <head>
       {% if title %}
-      <title>{{ title }} - RafaFdez</title>
+      <title>{{ title }} - MicroBlog</title>
       {% else %}
-      <title>Welcome to RafaFdez</title>
+      <title>Welcome to MicroBlog</title>
       {% endif %}
     </head>
     <body>
         <div>
-            RafaFdez:
+            MicroBlog:
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('explore') }}">Explore</a>
             {% if current_user.is_anonymous %}
-            <a href="{{ url_for('tutologin') }}">Login</a>
+            <a href="{{ url_for('login') }}">Login</a>
             {% else %}
-            <a href="{{ url_for('tutouser', username=current_user.username) }}">Profile</a>
-            <a href="{{ url_for('tutologout') }}">Logout</a>
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
             {% endif %}
         </div>
         <hr>

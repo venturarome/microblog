@@ -6,14 +6,14 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextA
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 from app.models import User
 
-# Tutorial
-class LoginTutoForm(FlaskForm):
+
+class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember me')
     submit = SubmitField('Sign In')
 
-class RegistrationTutoForm(FlaskForm):
+class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -31,14 +31,14 @@ class RegistrationTutoForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
-class EditProfileTutoForm(FlaskForm):
+class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     about_me = TextAreaField('About me', validators=[Length(min=0, max=256)])
     submit = SubmitField('Submit')
 
     # Overloaded constructor that accepts the original username as an argument, saves it as an instance variable, and checks it in 'validate_username()'
     def __init__(self, original_username, *args, **kwargs):
-        super(EditProfileTutoForm, self).__init__(*args, **kwargs)
+        super(EditProfileForm, self).__init__(*args, **kwargs)
         self.original_username = original_username
 
     def validate_username(self, username):
@@ -53,7 +53,7 @@ class CommentForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-### Actual website
+### Actual website (for future reference)
 
 #=== Admin login
 class AdminLoginForm(FlaskForm):

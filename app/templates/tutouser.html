@@ -20,9 +20,15 @@
         </tr>
     </table>
     <hr>
-    {% for post in posts %}
+    {% for comment in comments %}
         <!-- This is how a sub-template is included. The '_' is just a naming convention. -->
-        {% include '_post.html' %}
+        {% include '_comment.html' %}
     {% endfor %}
+    {% if prev_url %}
+    <a href="{{ prev_url }}">Newer posts</a>
+    {% endif %}
+    {% if next_url %}
+    <a href="{{ next_url }}">Older posts</a>
+    {% endif %}
 {% endblock %}
 

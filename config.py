@@ -16,6 +16,7 @@ class Config(object):
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')              # sender email username
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')              # sender email password
     ADMINS = ['contact.rafafdezjr@gmail.com']                    # receiver email
-
+    # Pagination support:
+    POSTS_PER_PAGE = 10 
     # 'Remember me' login functionality
     REMEMBER_COOKIE_DURATION = 604800  # Value in seconds (604800s = 1w)

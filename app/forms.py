@@ -47,6 +47,10 @@ class EditProfileTutoForm(FlaskForm):
             if user is not None:
                 raise ValidationError('Please use a different username.')
 
+class CommentForm(FlaskForm):
+    comment = TextAreaField('Say something', validators=[
+        DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Submit')
 
 
 ### Actual website

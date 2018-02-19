@@ -1,8 +1,10 @@
 from datetime import datetime
-from app import db, login
+from app import app, db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
+from time import time
+import jwt
 
 # Because Flask-Login knows nothing about databases, it needs the application's help in loading a user. For that reason, the extension expects that the application will configure a user loader function, that can be called to load a user given the ID.
 @login.user_loader
@@ -81,6 +83,21 @@ class User(UserMixin, db.Model): # Here, UserMixin is added so the flask-login m
                 filter(followers.c.follower_id == self.id))
         own = Comment.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Comment.timestamp.desc())
+
+    # Reset password. Creates a token.
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    # Side note: Static methods are like class methods, but they don receive 'self' as first argument.
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'], algorithms=['HS256'])['reset_password']
+        except:
+            return None
+        return User.query.get(id)
 
 
 class Comment(db.Model):

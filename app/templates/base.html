@@ -48,3 +48,8 @@
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}
+
+{% block scripts %} {# This block is imported from flask-bootstrap, as most of the blocks in this template. #}
+    {{ super() }}  {# This keeps what is defined in the parent template. #}
+    {{ moment.include_moment() }}
+{% endblock %}

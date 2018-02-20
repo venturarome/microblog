@@ -20,3 +20,5 @@ class Config(object):
     POSTS_PER_PAGE = 5 
     # 'Remember me' login functionality
     REMEMBER_COOKIE_DURATION = 604800  # Value in seconds (604800s = 1w)
+    # Multilanguage support:
+    LANGUAGES = ['en', 'es']

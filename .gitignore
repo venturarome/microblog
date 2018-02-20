@@ -39,3 +39,5 @@ venv
 app.db
 microblog.log*
 
+# Translations template
+*.pot

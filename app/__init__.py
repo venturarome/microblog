@@ -1,7 +1,7 @@
 import logging
 from logging.handlers import SMTPHandler, RotatingFileHandler
 import os
-from flask import Flask
+from flask import Flask, request
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -9,7 +9,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
-
+from flask_babel import Babel, lazy_gettext as _l
 
 ############################################################
 
@@ -23,10 +23,11 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
+login.login_message = _l('Please log in to access this page.')   # The Flask-Login extension flashes a message in English any time it redirects the user to the login page. This message can be overriden, so we make sure that it gets translated using the _l() function for lazy processing.
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
-
+babel = Babel(app)
 
 ############################################################
 
@@ -63,6 +64,15 @@ if not app.debug:
 
 ############################################################
     
+
+# 'localselector' is a decorator included in the Babel class. The decorated function is invoked for each request to select a language translation to use for that request
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+############################################################
+
     
 # Workaround to avoid circular imports. Import those modules which need to import the 'app' variable. Those modules (created by us) come from the 'app' PACKAGE.
 from app import routes, models, errors    # valdría tambien from . import routes??

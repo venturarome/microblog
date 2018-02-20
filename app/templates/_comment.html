@@ -6,10 +6,12 @@
                 </a>
             </td>
             <td>
-                <a href="{{ url_for('user', username=comment.author.username) }}">
-                    {{ comment.author.username }}
-                </a>
-                said {{ moment(comment.timestamp).fromNow() }}:
+                {% set user_link %}
+                    <a href="{{ url_for('user', username=comment.author.username) }}">
+                        {{ comment.author.username }}
+                    </a>
+                {% endset %}
+                {{ _('%(username)s said %(when)s', username=user_link, when=moment(comment.timestamp).fromNow()) }}:
                 <br>
                 {{ comment.body }}
             </td>

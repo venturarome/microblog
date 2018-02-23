@@ -22,3 +22,5 @@ class Config(object):
     REMEMBER_COOKIE_DURATION = 604800  # Value in seconds (604800s = 1w)
     # Multilanguage support:
     LANGUAGES = ['en', 'es']
+    # Translation (Azure services):
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')

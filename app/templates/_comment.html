@@ -13,7 +13,19 @@
                 {% endset %}
                 {{ _('%(username)s said %(when)s', username=user_link, when=moment(comment.timestamp).fromNow()) }}:
                 <br>
-                {{ comment.body }}
+                <span id="comment{{ comment.id }}">{{ comment.body }}</span>
+                {% if comment.language and comment.language != g.locale %}
+                <br><br>
+                <span id="translation{{ comment.id }}">
+                    <a href="javascript:translate(
+                                '#comment{{ comment.id }}',
+                                '#translation{{ comment.id }}',
+                                '{{ comment.language }}',
+                                '{{ g.locale }}');">
+                        {{ _('Translate') }}
+                    </a>
+                </span>
+                {% endif %}
             </td>
         </tr>
     </table>

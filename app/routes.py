@@ -7,6 +7,9 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 from app.email import send_password_reset_email
 from flask_babel import _, get_locale
+from guess_language import guess_language
+from flask import jsonify
+from app.translate import translate
 
 
 @app.before_request
@@ -17,6 +20,7 @@ def before_request():
         db.session.commit()
     g.locale = str(get_locale())    # So packages such as 'moment' can support multilanguage (added in the scripts block template).
 
+@app.route('/', methods=['GET', 'POST'])
 @app.route('/index/', methods=['GET', 'POST'])
 @login_required
 def index():
@@ -24,7 +28,10 @@ def index():
 
     # Handle form submission (POST):
     if form.validate_on_submit():
-        comment = Comment(body=form.comment.data, author=current_user)
+        language = guess_language(form.comment.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        comment = Comment(body=form.comment.data, author=current_user, language=language)
         db.session.add(comment)
         db.session.commit()
         flash(_('Your comment is now live!'))
@@ -172,3 +179,11 @@ def reset_password(token):
         flash(_('Your password has been reset.'))
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+# Online translation using Azure services.
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+    return jsonify({'text': translate(request.form['text'],
+                                      request.form['source_language'],
+                                      request.form['dest_language'])})

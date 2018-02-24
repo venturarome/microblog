@@ -10,6 +10,7 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_babel import Babel, lazy_gettext as _l
+from elasticsearch import Elasticsearch
 
 ############################################################
 
@@ -27,6 +28,7 @@ babel = Babel()
 ############################################################
 
 
+# Application Factory function:
 def create_app(config_class=Config):
     # Create the application object as an instance of class 'Flask'
     app = Flask(__name__)	# This is the 'app' VARIABLE. It is a member of the 'app' PACKAGE.
@@ -40,6 +42,8 @@ def create_app(config_class=Config):
     bootstrap.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
+    # Add other capabilities, not wrapped in a plugin:
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
 
     # Blueprints. Imported here to avoid circular dependencies.
     from app.errors import bp as errors_bp

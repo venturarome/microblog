@@ -26,8 +26,11 @@ class Config(object):
     LANGUAGES = ['en', 'es']
     # Translation (Azure services):
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+    # Elasticsearch:
+    ELASTICSEARCH_URL = os.environ.get('ELASTICSEARCH_URL')
     
     
 class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
+    ELASTICSEARCH_URL = None

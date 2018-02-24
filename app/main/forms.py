@@ -32,6 +32,19 @@ class CommentForm(FlaskForm):
     submit = SubmitField(_l('Submit'))
 
 
+class SearchForm(FlaskForm):
+    # For a form that has a text field, the browser will submit the form when you press Enter with the focus on the field, so a 'Submit' button is not needed.
+    q = StringField(_l('Search'), validators=[DataRequired()])
+    
+    def __init__(self, *args, **kwargs):
+        # The formdata argument determines from where Flask-WTF gets form submission (default is request.form (for POST), but in this case we want request.args (GET)).
+        if 'formdata' not in kwargs:
+            kwargs['formdata'] = request.args
+        # For clickable search links to work, CSRF security token needs to be disabled.
+        if 'csrf_enabled' not in kwargs:
+            kwargs['csrf_enabled'] = False
+        super(SearchForm, self).__init__(*args, **kwargs)
+
 
 ### Actual website (for future reference)
 from wtforms import PasswordField, DateField, FileField

@@ -6,6 +6,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
 from app import db, login
+from app.search import add_to_index, remove_from_index, query_index
 
 
 # Check documentation: http://flask-sqlalchemy.pocoo.org/2.3/
@@ -102,8 +103,51 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-class Comment(db.Model):
+############################################    
+    
+# Allows integration with the full-text search feature, and eases synchronization among both.
+class SearchableMixin(object):
+    @classmethod
+    def search(cls, expression, page, per_page):
+        # Wrapper for the query_index() function from app/search.py. It replaces id's by actual objects.
+        ids, total = query_index(cls.__tablename__, expression, page, per_page)
+        if total == 0:
+            return cls.query.filter_by(id=0), 0
+        when = []
+        for i in range(len(ids)):
+            when.append((ids[i], i))
+        return cls.query.filter(cls.id.in_(ids)).order_by(db.case(when, value=cls.id)), total
+    
+    @classmethod
+    def before_commit(cls, session):
+        # Triggered thanks to SQLAlchemy events, before a commit is performed.
+        session._changes = {
+            'add': [obj for obj in session.new if isinstance(obj, cls)],
+            'update': [obj for obj in session.dirty if isinstance(obj, cls)],
+            'delete': [obj for obj in session.deleted if isinstance(obj, cls)]
+        }
+        
+    @classmethod
+    def after_commit(cls, session):
+        # Triggered thanks to SQLAlchemy events, after a commit is performed.
+        for obj in session._changes['add']:
+            add_to_index(cls.__tablename__, obj)
+        for obj in session._changes['update']:
+            add_to_index(cls.__tablename__, obj)
+        for obj in session._changes['delete']:
+            remove_from_index(cls.__tablename__, obj)
+        session._changes = None
+        
+    @classmethod
+    def reindex(cls):
+        # Initialize the index from all the elements of the model currently in the database(ie. Comment.reindex())
+        for obj in cls.query:
+            add_to_index(cls.__tablename__, obj)
+
+
+class Comment(SearchableMixin, db.Model):
     __tablename__ = 'comment'
+    __searchable__ = ['body']
 
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(512))
@@ -113,3 +157,8 @@ class Comment(db.Model):
     
     def __repr__(self):
         return '<Comment {}>'.format(self.id)
+
+# Hooks for listening to events coming from SQLAlchemy:
+db.event.listen(db.session, 'before_commit', Comment.before_commit)
+db.event.listen(db.session, 'after_commit', Comment.after_commit)    
+    

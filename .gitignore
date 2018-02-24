@@ -41,3 +41,6 @@ microblog.log*
 
 # Translations template
 *.pot
+
+# Custom export script
+varsExport.sh

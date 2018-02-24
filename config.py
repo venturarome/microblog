@@ -1,10 +1,12 @@
 import os
+from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
+load_dotenv(os.path.join(basedir, '.env'))
 
 class Config(object):
     # Related to cryptographic signs (cookies and some extensions require this).
-    SECRET_KEY = os.environ.get('SECRET_KEY') or '6w_pyHQhb4A-KL%bq7kZAq~sq.H7R/Ya'
+    SECRET_KEY = os.environ.get('SECRET_KEY') #or '6w_pyHQhb4A-KL%bq7kZAq~sq.H7R/Ya'
     # Database config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABSE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
@@ -24,3 +26,8 @@ class Config(object):
     LANGUAGES = ['en', 'es']
     # Translation (Azure services):
     MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
+    
+    
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
